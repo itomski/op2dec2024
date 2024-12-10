@@ -54,6 +54,7 @@ public class App {
         m.setErscheinungsJahr(scanner.nextInt());
         scanner.nextLine(); // fix
         medien.add(m);
+        // Bla bla bla
         System.out.println("Gespeichert!");
     }
 
