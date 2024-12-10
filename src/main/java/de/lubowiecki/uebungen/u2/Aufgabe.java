@@ -9,6 +9,7 @@ public class Aufgabe {
     // eine für einen Würfelwurf mit mehreren 6-Seitigen Würfeln. Anzahl wird als Parameter vorgegeben
     // Beide Methoden sollen die Werte zurückgeben und nicht selbst auf der Konsole ausgeben
 
+    // Aufgabe 2
     // Schreibe eine Taschenrechner-Klasse mit den 4 Grundrechenarten für double Werte
     // Die Methoden sollen bei der Ausführung die Aktion in ein Protokoll schreiben
     // z.B. bei add(10, 22) wird "10 + 22 = 32" ins Protokoll geschrieben.
