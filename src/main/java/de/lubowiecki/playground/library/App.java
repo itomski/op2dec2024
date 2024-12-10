@@ -1,5 +1,6 @@
 package de.lubowiecki.playground.library;
 
+import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -43,19 +44,17 @@ public class App {
 
     // Instanzmethode
     private void createNew() {
-        Buch m = new Buch();
-        System.out.print("Titel: ");
-        m.setTitel(scanner.nextLine());
-        System.out.print("Autor: ");
-        m.setAutor(scanner.nextLine());
-        System.out.print("Seiten: ");
-        m.setAnzahlSeiten(scanner.nextInt());
-        System.out.print("Erscheinungsjahr: ");
-        m.setErscheinungsJahr(scanner.nextInt());
-        scanner.nextLine(); // fix
-        medien.add(m);
-        // Bla bla bla
-        System.out.println("Gespeichert!");
+
+        System.out.print("Welches Medium? ");
+        String auswahl = scanner.nextLine().trim().toLowerCase();
+
+        try {
+            medien.add(Medien.createMedium(scanner, auswahl));
+            System.out.println("Gespeichert!");
+        }
+        catch (RuntimeException e) {
+            System.out.println("Falsche auswahl!");
+        }
     }
 
     private void showAll() {
@@ -65,9 +64,10 @@ public class App {
     }
 
     private void showSelected(String selection) {
-        for(Medium m : medien) {
-            //if(m instanceof selection)
-            //    System.out.println(m);
-        }
+        throw new UnsupportedOperationException("Noch nicht eingbaut!");
+//        for(Medium m : medien) {
+//            if(m instanceof selection)
+//                System.out.println(m);
+//        }
     }
 }
