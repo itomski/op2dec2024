@@ -11,7 +11,7 @@ public class App {
     // Es können alle Medien angezeigt werden
     // Es können Medien nach ihrer Art angezeigt werden
 
-    private List<Buch> medien = new ArrayList<>();
+    private List<Medium> medien = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
     // (static) Klassenmethode - dürfen nur statische Methoden und statische Eigenschaften benutzen
@@ -36,8 +36,6 @@ public class App {
                 case "buch" -> showSelected("buch");
                 default -> System.out.println("Falsche Eingabe!");
             }
-
-            System.out.println(input);
         }
 
         System.out.println("Programmende");
@@ -45,14 +43,30 @@ public class App {
 
     // Instanzmethode
     private void createNew() {
-        // TODO: Neues Medium
+        Buch m = new Buch();
+        System.out.print("Titel: ");
+        m.setTitel(scanner.nextLine());
+        System.out.print("Autor: ");
+        m.setAutor(scanner.nextLine());
+        System.out.print("Seiten: ");
+        m.setAnzahlSeiten(scanner.nextInt());
+        System.out.print("Erscheinungsjahr: ");
+        m.setErscheinungsJahr(scanner.nextInt());
+        scanner.nextLine(); // fix
+        medien.add(m);
+        System.out.println("Gespeichert!");
     }
 
     private void showAll() {
-        // TODO: Alle Medien anzwigen
+        for(Medium m : medien) {
+            System.out.println(m.getInfoFull());
+        }
     }
 
     private void showSelected(String selection) {
-        // TODO: Nur Bücher anzeigen
+        for(Medium m : medien) {
+            //if(m instanceof selection)
+            //    System.out.println(m);
+        }
     }
 }

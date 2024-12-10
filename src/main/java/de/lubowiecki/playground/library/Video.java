@@ -1,4 +1,16 @@
 package de.lubowiecki.playground.library;
 
-public class Video {
+public class Video implements Medium {
+
+    @Override
+    public String getInfoShort() {
+        // TODO: muss richtig implementiert werden
+        throw new UnsupportedOperationException("Ist noch nicht implementiert.");
+    }
+
+    @Override
+    public String getInfoFull() {
+        // TODO: muss richtig implementiert werden
+        throw new UnsupportedOperationException("Ist noch nicht implementiert.");
+    }
 }
