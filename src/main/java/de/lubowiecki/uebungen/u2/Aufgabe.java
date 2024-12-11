@@ -28,7 +28,5 @@ public class Aufgabe {
         System.out.println(calculator.getProtokoll());
         calculator.clear();
         System.out.println(calculator.getProtokoll());
-
-
     }
 }
