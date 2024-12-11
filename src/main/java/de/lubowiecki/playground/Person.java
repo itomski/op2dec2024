@@ -1,8 +1,9 @@
 package de.lubowiecki.playground;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Person {
+public class Person implements Serializable {
 
     // Klassenvariable: Alle Objekte teilen siche eine gemeinsam
     private static int count;
