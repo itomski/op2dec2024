@@ -1,5 +1,7 @@
 package de.lubowiecki.uebungen.u2;
 
+import java.util.Arrays;
+
 public class Aufgabe {
 
     // Aufgabe 1
@@ -17,4 +19,16 @@ public class Aufgabe {
     // vergangenen Methoden-Aufrufe anschauen kann.
     // mit der Methode clear() kann das Protokoll geleert werden
 
+    public static void main(String[] args) {
+
+        Calculator calculator = Calculator.getInstance();
+        calculator.add(10, 15);
+        calculator.add(10, 27);
+        calculator.add(10, 15);
+        System.out.println(calculator.getProtokoll());
+        calculator.clear();
+        System.out.println(calculator.getProtokoll());
+
+
+    }
 }
