@@ -12,6 +12,10 @@ public class App {
     // Es können alle Medien angezeigt werden
     // Es können Medien nach ihrer Art angezeigt werden
 
+    // Aufgabe 3
+    // Schreibe die Medien beim Verlassen des Programms in eine Date
+    // Lese beim Start die Daten aus der Datei wieder ein
+
     private List<Medium> medien = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
