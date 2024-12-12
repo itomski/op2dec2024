@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<medien>
+    <medium typ="buch">
+        <titel>Kochen ohne Fett</titel>
+        <autor>...</autor>
+    </medium>
+    <medium typ="video">
+        <titel>Kochen ohne Fett</titel>
+        <autor>...</autor>
+    </medium>
+    <medium typ="zeitschrift">
+        <titel>Kochen ohne Fett</titel>
+        <autor>...</autor>
+    </medium>
+    <medium typ="buch">
+        <titel>Kochen ohne Fett</titel>
+        <autor>...</autor>
+    </medium>
+</medien>
