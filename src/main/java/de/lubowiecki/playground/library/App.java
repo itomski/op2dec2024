@@ -1,20 +1,14 @@
 package de.lubowiecki.playground.library;
 
 import javax.swing.text.View;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
 
-    // Eine Bibliothek kann viele unterschiedliche Medien aufnehmen
-    // Es können Medien hinzugefügt werden
-    // Es können alle Medien angezeigt werden
-    // Es können Medien nach ihrer Art angezeigt werden
-
-    // Aufgabe 3
-    // Schreibe die Medien beim Verlassen des Programms in eine Date
-    // Lese beim Start die Daten aus der Datei wieder ein
+    private static final String FILE = System.getProperty("user.home") + "/media-data.ser";
 
     private List<Medium> medien = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
@@ -22,6 +16,10 @@ public class App {
     // (static) Klassenmethode - dürfen nur statische Methoden und statische Eigenschaften benutzen
     public static void main(String[] args) {
         new App().start(); // Wechsel vom statischen auf Instanzkontext
+    }
+
+    public App() {
+        loadFromFile(); // Daten werden beim Start der App aus der Datei geladen
     }
 
     public void start() {
@@ -38,7 +36,6 @@ public class App {
                 case "exit" -> { break app; }
                 case "new" -> createNew();
                 case "all" -> showAll();
-                case "buch" -> showSelected("buch");
                 default -> System.out.println("Falsche Eingabe!");
             }
         }
@@ -55,6 +52,7 @@ public class App {
         try {
             medien.add(Medien.createMedium(scanner, auswahl));
             System.out.println("Gespeichert!");
+            saveToFile(); // Nach jeder Änderung wird gespeichert
         }
         catch (RuntimeException e) {
             System.out.println("Falsche auswahl!");
@@ -67,11 +65,21 @@ public class App {
         }
     }
 
-    private void showSelected(String selection) {
-        throw new UnsupportedOperationException("Noch nicht eingbaut!");
-//        for(Medium m : medien) {
-//            if(m instanceof selection)
-//                System.out.println(m);
-//        }
+    private void saveToFile() {
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE))) {
+            out.writeObject(medien);
+        }
+        catch (IOException e) {
+            System.out.println("Fehler! Daten konnten nicht gespeichert werden!");
+        }
+    }
+
+    private void loadFromFile() {
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(FILE))) {
+            medien = (List<Medium>) in.readObject();
+        }
+        catch (IOException | ClassNotFoundException e) {
+            System.out.println("Fehler! Daten konnten nicht geladen werden!");
+        }
     }
 }

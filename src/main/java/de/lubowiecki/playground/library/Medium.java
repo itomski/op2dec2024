@@ -1,6 +1,8 @@
 package de.lubowiecki.playground.library;
 
-public interface Medium {
+import java.io.Serializable;
+
+public interface Medium extends Serializable {
 
     // Alle Methoden im Interface sind automatisch public
     String getInfoShort();
