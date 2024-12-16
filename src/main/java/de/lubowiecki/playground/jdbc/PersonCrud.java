@@ -49,23 +49,48 @@ public class PersonCrud {
         }
     }
 
-    // Create
-    public boolean insert(Person person) throws SQLException {
+    public boolean save(Person person) throws SQLException {
+        if(person.getId() > 0) {
+            return update(person);
+        }
+        else {
+            return insert(person);
+        }
+    }
 
-        // TODO: SQLInjection ist möglich
-        String sql = "INSERT INTO " + TABLE + " (id, vorname, nachname) VALUES(null, '%s', '%s')";
-        sql = String.format(sql, person.getVorname(), person.getNachname());
+    // Create
+    private boolean insert(Person person) throws SQLException {
+
+        // mit PreparedStatements ist eine SQLInjection nicht mehr möglich
+        final String SQL = "INSERT INTO " + TABLE + " (id, vorname, nachname) VALUES(null, ?, ?)";
+
+        try(Connection dbh = DbConnectionFactory.get();
+            PreparedStatement stmt = dbh.prepareStatement(SQL)) {
+            stmt.setString(1, person.getVorname());
+            stmt.setString(2, person.getNachname());
+            stmt.execute();
+
+            // Den vergebenen PrimatyKey abfragen und in Person ablegen
+            ResultSet keys = stmt.getGeneratedKeys();
+            if(keys.next()) {
+                person.setId(keys.getInt(1));
+                return true;
+            }
+            return false;
+        }
+    }
+
+    // Update
+    private boolean update(Person person) throws SQLException {
+
+        String sql = "UPDATE " + TABLE + " SET vorname = '%s', nachname = '%s' WHERE id = %d";
+        sql = String.format(sql, person.getVorname(), person.getNachname(), person.getId());
 
         try(Connection dbh = DbConnectionFactory.get();
             Statement stmt = dbh.createStatement()) {
             stmt.execute(sql);
             return stmt.getUpdateCount() > 0;
         }
-    }
-
-    // Update
-    public boolean update(Person person) {
-        throw new UnsupportedOperationException("Noch nicht implementiert");
     }
 
     // Delete

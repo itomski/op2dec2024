@@ -16,7 +16,7 @@ public class DatabaseTest1 {
 
             // Insert
 //            Person p = new Person("Peter", "Parker");
-//            if(crud.insert(p)) {
+//            if(crud.save(p)) {
 //                System.out.println("Gespeichert");
 //            }
 
@@ -39,20 +39,33 @@ public class DatabaseTest1 {
 //                }
 //            }
 
-            // Delete By ID
-            if(crud.deleteById(3)) {
-                System.out.println("Gelöscht!");
+//            // Delete By ID
+//            if(crud.deleteById(3)) {
+//                System.out.println("Gelöscht!");
+//            }
+//
+//            for(Person p : crud.findAll()) {
+//                System.out.println(p);
+//            }
+
+            // Update
+            Person p = new Person("Scott", "Lang");
+            if(crud.save(p)) {
+                System.out.println("Gespeichert");
             }
 
-            for(Person p : crud.findAll()) {
-                System.out.println(p);
+            System.out.println(p);
+
+            p.setVorname("Tony");
+            if(crud.save(p)) {
+                System.out.println("Gespeichert");
             }
         }
         catch (SQLException e) {
             System.out.println("Probleme bei der Arbeit mit der Datenbank");
+            e.printStackTrace();
         }
     }
-
 
     /*
     public static void main(String[] args) {
