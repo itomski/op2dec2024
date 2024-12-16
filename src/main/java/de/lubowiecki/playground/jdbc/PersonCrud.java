@@ -7,8 +7,11 @@ import java.util.List;
 // ORM - Objekt Relationales Mapping
 public class PersonCrud {
 
-    private final String TABLE = "personen";
+    // ORM-Pattern
+    // DataMapper: Datenklasse (Person) + Mapper-Klasse (PersonCrud)
+    // ActiveRecord: Datenklasse enthält die Persistenzlogik (Person)
 
+    private final String TABLE = "personen";
 
     public PersonCrud() throws SQLException {
         createTable();
