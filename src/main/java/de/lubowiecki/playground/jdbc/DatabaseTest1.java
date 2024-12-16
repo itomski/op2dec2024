@@ -11,11 +11,42 @@ public class DatabaseTest1 {
 
 
         try {
+            // Erzeugung der Tabelle
             PersonCrud crud = new PersonCrud();
 
-            Person p = new Person("Bruce", "Banner");
-            crud.insert(p);
+            // Insert
+//            Person p = new Person("Peter", "Parker");
+//            if(crud.insert(p)) {
+//                System.out.println("Gespeichert");
+//            }
 
+//            // Select
+//            Person p = crud.find(1);
+//            System.out.println(p);
+//            if(p != null)
+//                System.out.println(p.getVorname());
+
+//            // FindAll
+//            for(Person p : crud.findAll()) {
+//                System.out.println(p);
+//            }
+
+//            // Delete By Person
+//            {
+//                Person p = crud.find(1);
+//                if(crud.delete(p)) {
+//                    System.out.println("Gelöscht!");
+//                }
+//            }
+
+            // Delete By ID
+            if(crud.deleteById(3)) {
+                System.out.println("Gelöscht!");
+            }
+
+            for(Person p : crud.findAll()) {
+                System.out.println(p);
+            }
         }
         catch (SQLException e) {
             System.out.println("Probleme bei der Arbeit mit der Datenbank");
