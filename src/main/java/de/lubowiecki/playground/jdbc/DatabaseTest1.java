@@ -48,18 +48,24 @@ public class DatabaseTest1 {
 //                System.out.println(p);
 //            }
 
-            // Update
-            Person p = new Person("Scott", "Lang");
-            if(crud.save(p)) {
-                System.out.println("Gespeichert");
+//            // Update
+//            Person p = new Person("Scott", "Lang");
+//            if(crud.save(p)) {
+//                System.out.println("Gespeichert");
+//            }
+//
+//            System.out.println(p);
+//
+//            p.setVorname("Tony");
+//            if(crud.save(p)) {
+//                System.out.println("Gespeichert");
+//            }
+
+            // FindByVorname
+            for(Person p : crud.findAllByVorname("Peter")) {
+                System.out.println(p);
             }
 
-            System.out.println(p);
-
-            p.setVorname("Tony");
-            if(crud.save(p)) {
-                System.out.println("Gespeichert");
-            }
         }
         catch (SQLException e) {
             System.out.println("Probleme bei der Arbeit mit der Datenbank");

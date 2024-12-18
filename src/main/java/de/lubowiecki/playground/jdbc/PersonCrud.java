@@ -35,17 +35,25 @@ public class PersonCrud {
     }
 
     public List<Person> findAll() throws SQLException {
-
         final String SQL = "SELECT * FROM " + TABLE;
+        return findAllBy(SQL);
+    }
 
-        try(Connection dbh = DbConnectionFactory.get();
-            Statement stmt = dbh.createStatement()) {
+    public List<Person> findAllByVorname(String vorname) throws SQLException {
+        final String SQL = "SELECT * FROM " + TABLE + " WHERE vorname LIKE '%" + vorname + "%'";
+        return findAllBy(SQL);
+    }
+
+    private List<Person> findAllBy(final String SQL) throws SQLException {
+
+        try (Connection dbh = DbConnectionFactory.get();
+                Statement stmt = dbh.createStatement()) {
             stmt.execute(SQL);
             ResultSet result = stmt.getResultSet();
 
             List<Person> liste = new ArrayList<>();
 
-            while(result.next()) {
+            while (result.next()) {
                 liste.add(populate(result));
             }
             return liste;
@@ -86,12 +94,15 @@ public class PersonCrud {
     // Update
     private boolean update(Person person) throws SQLException {
 
-        String sql = "UPDATE " + TABLE + " SET vorname = '%s', nachname = '%s' WHERE id = %d";
-        sql = String.format(sql, person.getVorname(), person.getNachname(), person.getId());
+        final String SQL = "UPDATE " + TABLE + " SET vorname = ?, nachname = ? WHERE id = ?";
 
         try(Connection dbh = DbConnectionFactory.get();
-            Statement stmt = dbh.createStatement()) {
-            stmt.execute(sql);
+            PreparedStatement stmt = dbh.prepareStatement(SQL)) {
+            stmt.setString(1, person.getVorname());
+            stmt.setString(2, person.getNachname());
+            stmt.setInt(3, person.getId());
+            stmt.execute();
+
             return stmt.getUpdateCount() > 0;
         }
     }
