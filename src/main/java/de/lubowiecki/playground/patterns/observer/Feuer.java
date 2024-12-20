@@ -1,43 +1,15 @@
 package de.lubowiecki.playground.patterns.observer;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Observable;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Feuer {
+// Publisher / Subject
+// Der Publisher benachrichtigt die Subscriber über die eigenen Zustands-Änderung
+public class Feuer extends AbstractPublisher {
 
     private boolean an;
-
-    private List<Observer> observerList = new CopyOnWriteArrayList<>();
-    //private Set<Observer> observerSet = new HashSet<>(); // Set erlaubt keine Duplikate
-
-    private boolean changed = false;
-
-    public void addObserver(Observer observer) {
-        observerList.add(observer);
-    }
-
-    public void addObserver(Observer... observer) {
-        observerList.addAll(List.of(observer));
-    }
-
-    public void removeObserver(Observer observer) {
-        observerList.remove(observer);
-    }
-
-    public void notifyObservers() {
-//        for(Observer o : observerSet) { // ConcurrentModificationException wenn gleichzeitig durchlaufen und bearbeitet wird
-//            o.update(this);
-//        }
-
-        Iterator<Observer> itr = observerList.iterator();
-        while(itr.hasNext()) {
-            itr.next().update(this);
-        }
-        changed = false;
-    }
 
     public boolean isAn() {
         return an;
@@ -46,10 +18,16 @@ public class Feuer {
     public void setAn(boolean an) {
         if(this.an != an) {
             this.an = an;
-            changed = true;
+            setChanged(true);
         }
 
-        if(changed)
+        if(isChanged())
             notifyObservers();
+    }
+
+
+    @Override
+    public AbstractPublisher getState() {
+        return this;
     }
 }

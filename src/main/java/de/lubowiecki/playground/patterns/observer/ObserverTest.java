@@ -4,9 +4,11 @@ public class ObserverTest {
 
     public static void main(String[] args) {
 
+        // Publisher / Subject
         Feuer feuer = new Feuer();
         System.out.println(feuer.isAn());
 
+        // Subscriber
         Scout s1 = new Scout("Peter");
         Scout s2 = new Scout("Bruce");
         Scout s3 = new Scout("Carol");

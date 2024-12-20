@@ -1,5 +1,6 @@
 package de.lubowiecki.playground.patterns.observer;
 
+// Subscriber
 public class Wolf implements Observer {
 
     private static int count;
@@ -19,7 +20,9 @@ public class Wolf implements Observer {
     }
 
     @Override
-    public void update(Feuer feuer) {
+    public void update(AbstractPublisher obj) {
+
+        Feuer feuer = (Feuer) obj;
 
         if(feuer.isAn()) {
             verstecktSich();
