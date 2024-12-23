@@ -13,7 +13,7 @@ public class HttpDataReader {
 
     public static void main(String[] args) {
 
-        final String URL = "http://localhost:8080/api/v1/fahrzeuge";
+        final String URL = "https://my-json-server.typicode.com/typicode/demo/posts";
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -33,9 +33,6 @@ public class HttpDataReader {
 
     public static String parseJson(String json) {
 
-        System.out.println(json);
-
-        /*
         final ObjectMapper mapper = new ObjectMapper();
         CollectionType type = mapper.getTypeFactory().constructCollectionType(List.class, Post.class);
         try {
@@ -45,7 +42,6 @@ public class HttpDataReader {
         catch(Exception e) {
             e.printStackTrace();
         }
-        */
 
         return null;
     }
